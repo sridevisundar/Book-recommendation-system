@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommendation System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #FAF9F6;
+            font-family: 'Times New Roman', Times, serif;
+            padding-top: 70px;
+        }
+        .navbar {
+            background-color: #654321;
+            color: white;
+            border-radius: 0;
+            border: none;
+        }
+        .navbar-brand {
+            color: white !important;
+        }
+        .navbar-nav > li > a {
+            color: white !important;
+        }
+        .navbar-nav > li > a:hover {
+            color: #A0522D !important;
+        }
+        .card {
+            background-color: #FEFEFA;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            margin-bottom: 20px;
+            width: 220px;
+            height: 340px;
+            overflow: hidden;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-body {
+            padding: 10px;
+            height: 220px;
+            overflow: auto;
+        }
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            width: 100%;
+            height: 180px; /* Slightly larger height */
+            object-fit: contain; /* Display the entire image */
+        }
+        .card h3, .card h4 {
+            margin: 5px 0;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal; /* Allow wrapping */
+            font-size: 16px; /* Reduced font size */
+        }
+        .card h3 {
+            font-weight: bold; /* Bold font for book titles */
+        }
+        .text-black {
+            color: #333;
+        }
+        .top-books-header {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 36px;
+            text-align: left;
+            color: #333;
+            padding-bottom: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #654321; /* Saddle Brown */
+        }
+        .navbar-right {
+            margin-right: 20px; /* Adjust margin for proper positioning */
+        }
+        .dropdown-menu {
+            background-color: #654321; /* Saddle Brown */
+            border: none;
+        }
+
+        .dropdown-menu > li > a {
+            color: white !important;
+        }
+
+        .dropdown-menu > li > a:hover {
+            color: #A0522D !important; /* Wheat */
+        }
+        .footer {
+            background-color: #654321; /* Saddle Brown */
+            color: white;
+            padding: 20px 0; /* Adjust padding as needed */
+        }
+        .admin-link {
+            font-size: 20px; /* Adjust font size as needed */
+            color: white;
+        }
+        .lock-icon {
+            margin-right: 5px; /* Adjust spacing between icon and text */
+        }
+
+.table {
+    display: none; /* Hide the table from the webpage */
+}
+
+       @media print {
+    body {
+        padding-top: 0;
+        background-color: white;
+    }
+    .container {
+        width: auto;
+        padding: 0;
+        margin: 0;
+    }
+    .row {
+        margin-bottom: 20px;
+    }
+    .card {
+        display: none; /* Hide cards during printing */
+    }
+    .print-table {
+        display: table !important; /* Display the table for printing */
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .print-table th,
+    .print-table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+    .print-table th {
+        background-color: #f2f2f2;
+    }
+    .print-table img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .top-books-header {
+        text-align: center;
+        margin-top: 50vh; /* Adjust to position in the middle */
+        transform: translateY(-50%);
+        font-size: 60px;
+    }
+    /* Ensure the table is visible during printing */
+    .table-print {
+        display: table !important;
+    }
+    .table {
+        display: table !important;
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand">My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/" style="color: white;">Home</a></li>
+            <li><a href="/recommend" style="color: white;">Recommend</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ session['username'] }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/delete_account">Delete Account</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-right" action="/search_book" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search_query" placeholder="Search for books...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</nav>
+
+<div class="container non-print">
+    <h1 class="top-books-header">Top 50 Books
+    <!-- Print option -->
+    <div class="text-right">
+        <button class="btn btn-default" onclick="window.print()">
+            <i class="fas fa-print"></i> Print
+        </button>
+    </div></h1>
+    <div class="row">
+        {% for i in range(book_name|length) %}
+        <div class="col-md-3" style="margin-bottom: 20px;">
+            <div class="card">
+                <img class="card-img-top" src="{{ image[i] }}" alt="Book Cover">
+                <div class="card-body">
+                    <h3>{{ book_name[i] }}</h3>
+                    <h4>{{ book_authors[i] }}</h4>
+                    <h4>Votes - {{ votes[i] }}</h4>
+                    <h4>Rating - {{ rating[i] }}</h4>
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 4 == 0 %}
+        </div>
+        <div class="row">
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+<table class="table table-striped table-print">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Image</th>
+                <th>Votes</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(book_name|length) %}
+            <tr>
+                <td>{{ book_name[i] }}</td>
+                <td>{{ book_authors[i] }}</td>
+                <td><img src="{{ image[i] }}" alt="Book Cover"></td>
+                <td>{{ votes[i] }}</td>
+                <td>{{ rating[i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<footer class="footer">
+    <div class="container text-right">
+        <li>
+            <a href="/admin_login" class="admin-link">
+                <i class="fas fa-lock lock-icon"></i> Admin
+            </a>
+        </li>
+    </div>
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

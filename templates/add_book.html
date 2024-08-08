@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #FAF9F6; /* Beige */
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container {
+            margin-top: 50px; /* Adjust top margin for centering */
+        }
+        .btn-primary {
+            background-color: #654321; /* Saddle Brown */
+            border-color: #654321; /* Saddle Brown */
+        }
+        .btn-primary:hover {
+            background-color: #A0522D; /* Sienna */
+            border-color: #A0522D; /* Sienna */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Add Book</h2>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="/add_book" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" class="form-control" id="author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="image_url">Image URL:</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url">
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN:</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" required>
+                </div>
+                <div class="form-group">
+                    <label for="publisher">Publisher:</label>
+                    <input type="text" class="form-control" id="publisher" name="publisher">
+                </div>
+                <div class="form-group">
+                    <label for="year_of_publication">Year of Publication:</label>
+                    <input type="text" class="form-control" id="year_of_publication" name="year_of_publication">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Book</button>
+            </form>
+            <br>
+            <a href="/admin_dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

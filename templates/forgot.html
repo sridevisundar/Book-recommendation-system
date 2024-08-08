@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #FAF9F6;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .form-signup {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signup .form-signup-heading,
+        .form-signup .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-signup .checkbox {
+            font-weight: normal;
+        }
+        .form-signup .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signup .form-control:focus {
+            z-index: 2;
+        }
+        .form-signup input[type="text"],
+        .form-signup input[type="password"] {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .form-signup button {
+            margin-top: 20px;
+            background-color: #654321;
+            border-color: #654321;
+        }
+        .form-signup button:hover {
+            background-color: #A0522D;
+            border-color: #A0522D;
+        }
+        .form-heading {
+            margin-top: 20px;
+        }
+        .form-signup .form-signup-heading,
+        .form-signup .checkbox {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="form-signup-heading text-center">My Book Recommender</h2>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+    {% endif %}
+    <form action="/forgot_password" method="post" class="form-signup">
+        <h3 class="form-signup-heading text-center">Forgot Password</h3>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="new_password" class="sr-only">New Password</label>
+        <input type="password" id="new_password" name="new_password" class="form-control" placeholder="New Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Password</button>
+        <p class="text-center" style="margin-top: 20px;">Remember the Password? <a href="/login">Go back to Sign-in</a></p>
+    </form>
+</div>
+
+</body>
+</html>

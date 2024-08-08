@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #FAF9F6; /* Beige */
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container {
+            margin-top: 50px; /* Adjust top margin for centering */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Add space between form inputs */
+        }
+        .btn-primary {
+            background-color: #654321; /* Saddle Brown */
+            border-color: #654321; /* Saddle Brown */
+        }
+        .btn-primary:hover {
+            background-color: #A0522D; /* Sienna */
+            border-color: #A0522D; /* Sienna */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Add Admin</h2>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form method="post">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+</form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
